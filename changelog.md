@@ -12,6 +12,27 @@
 
 ### Fixed
 
+## [0.2.0] - 2025-05-05
+
+### Added
+- Defined Phase 1 development priorities focusing on core single-player experience
+- Created detailed checklist for Phase 1 completion tasks
+- Refined frontend component requirements to focus on single-player features
+
+### Changed
+- Restructured development roadmap to prioritize single-player experience before multiplayer features
+- Updated game mode implementation plan to complete single-player modes first
+- Deferred multiplayer features, social features, and premium features to Phase 2
+
+### Deprecated
+- None
+
+### Removed
+- None
+
+### Fixed
+- None
+
 ## [0.1.0] - 2025-05-05
 
 ### Added
