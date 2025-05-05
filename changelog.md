@@ -3,6 +3,23 @@
 ## [Unreleased]
 
 ### Added
+- None
+
+### Changed
+- None
+
+### Deprecated
+- None
+
+### Removed
+- None
+
+### Fixed
+- None
+
+## [0.7.0] - 2024-05-08
+
+### Added
 - Completed all Phase 1 development priorities
 - Updated developer-todo.md to reflect completed tasks
 - Enhanced user profile statistics display
