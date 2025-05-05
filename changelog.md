@@ -13,9 +13,13 @@
 - Implemented simple WordChain game component with core game logic
 - Updated App component to use the new components and layout
 - Completely revised README.md with project description, features, and setup instructions
+- Enhanced Supabase client with security best practices
+- Added security utilities for user role-based access control
+- Created protected route hook for authenticated routes
+- Added database schema reference with Row Level Security policies
 
 ### Changed
-- None
+- Improved Supabase client with additional configuration options and validation
 
 ### Deprecated
 - None
