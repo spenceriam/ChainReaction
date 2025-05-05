@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+1. Always refer to [developerguide.mdc](mdc:.cursor/rules/developerguide.mdc)
+2. After each change refer to [developer-todo.md](mdc:developer-todo.md) and update accordingly to changes
+3. If confused or need claification, please ask and do not act without an approval

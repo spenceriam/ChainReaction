@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+1. Always review if a changelog.md file exists on the root folder.  If it does exist, review it.  If it does not exist, create one using [changelog-template.md](mdc:changelog-template.md) as an example
+2. Always update the changelog.md after each change and before a git commit and push is requested
