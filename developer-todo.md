@@ -9,21 +9,21 @@ The following tasks are prioritized for Phase 1 completion:
 1. **Frontend Components**
    - [x] Authentication screens
    - [x] Game interface components
-   - [ ] Game mode screens (single-player only)
+   - [x] Game mode screens (single-player only)
      - [x] Daily challenge
      - [x] Timed mode
      - [x] Endless mode
-   - [ ] Leaderboard views (single-player only)
+   - [x] Leaderboard views (single-player only)
      - [x] Daily leaderboard
      - [x] Weekly leaderboard
      - [x] Timed mode leaderboard
      - [x] Endless mode leaderboard
-   - [ ] Player profile components
-     - [ ] Statistics display
-     - [ ] Game history
+   - [x] Player profile components
+     - [x] Statistics display
+     - [x] Game history
 
 2. **Game Mode Implementation**
-   - [ ] Implement single-player modes
+   - [x] Implement single-player modes
      - [x] Daily challenge
        - [x] Daily puzzle generation/retrieval
        - [x] Challenge completion tracking
@@ -151,24 +151,24 @@ The following tasks are prioritized for Phase 1 completion:
   - Timer
   - Score counter
 
-- [ ] Develop single-player game mode screens
+- [x] Develop single-player game mode screens
   - Daily challenge
   - Timed mode
   - Endless mode
 
-- [ ] Build single-player leaderboard views
+- [x] Build single-player leaderboard views
   - Daily leaderboard
   - Weekly leaderboard
   - Personal best records
 
-- [ ] Design player profile components
+- [x] Design player profile components
   - Statistics display
   - Achievement showcase
   - Game history
 
 ## Game Mode Implementation
 
-- [ ] Implement single-player modes
+- [x] Implement single-player modes
   - Daily challenge
     - Daily puzzle generation/retrieval
     - Challenge completion tracking

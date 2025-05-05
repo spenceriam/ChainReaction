@@ -12,7 +12,31 @@
 
 ### Fixed
 
-## [0.5.0] - 2025-05-05
+## [0.6.0] - 2024-05-05
+
+### Added
+- Completed all Phase 1 development priorities
+- Updated developer-todo.md to reflect completed tasks
+- Enhanced user profile statistics display
+- Added game history placeholders for future updates
+- Implemented comprehensive leaderboard functionality across all game modes
+
+### Changed
+- Optimized game mode components for better performance
+- Updated navigation to improve user flow between game modes
+- Refined user interface for consistency across all components
+
+### Deprecated
+- None
+
+### Removed
+- None
+
+### Fixed
+- Fixed dates in changelog entries
+- Corrected task status in developer-todo.md
+
+## [0.5.0] - 2024-05-05
 
 ### Added
 - Implemented Endless Mode feature with continuously generated chains
@@ -39,7 +63,7 @@
 ### Fixed
 - Fixed type checking in Leaderboard component to properly handle different entry types
 
-## [0.4.0] - 2025-05-05
+## [0.4.0] - 2024-05-05
 
 ### Added
 - Implemented Timed Mode feature with progressive difficulty
@@ -65,7 +89,7 @@
 ### Fixed
 - None
 
-## [0.3.0] - 2025-05-05
+## [0.3.0] - 2024-05-05
 
 ### Added
 - Created DailyChallenge component for displaying the daily word chain challenge
@@ -92,7 +116,7 @@
 ### Fixed
 - None
 
-## [0.2.0] - 2025-05-05
+## [0.2.0] - 2024-05-05
 
 ### Added
 - Defined Phase 1 development priorities focusing on core single-player experience
@@ -113,7 +137,7 @@
 ### Fixed
 - None
 
-## [0.1.0] - 2025-05-05
+## [0.1.0] - 2024-05-05
 
 ### Added
 - Set up proper directory structure following development guidelines
