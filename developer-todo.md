@@ -25,25 +25,34 @@ This document outlines the implementation tasks for developing the ChainReaction
 
 ## Database Implementation
 
-- [x] Create database tables in Supabase
+- [x] Create core database tables in Supabase
   - `users` table (extends Supabase auth)
   - `words` dictionary table
   - `daily_challenges` table
   - `user_solutions` table
-  - `tournaments` table
-  - `tournament_rounds` table
   - `user_stats` table
 
-- [x] Implement database functions
+- [ ] Create multiplayer database tables in Supabase
+  - `tournaments` table
+  - `tournament_rounds` table
+  - Additional tables for multiplayer functionality
+
+- [x] Implement core database functions
   - Word validation function
   - Score calculation function
-  - Tournament pairing algorithm
   - Daily challenge generation function
 
-- [x] Set up Supabase Realtime channels
+- [ ] Implement multiplayer database functions
+  - Tournament pairing algorithm
+  - Multiplayer game synchronization functions
+
+- [x] Set up Supabase Realtime channels for single-player
   - Game state synchronization
   - Leaderboard updates
+
+- [ ] Set up Supabase Realtime channels for multiplayer
   - Tournament progress tracking
+  - Real-time game synchronization
 
 ## Core Game Logic
 
@@ -107,35 +116,34 @@ This document outlines the implementation tasks for developing the ChainReaction
 
 ## Game Mode Implementation
 
-- [ ] Implement daily challenge
-  - Daily puzzle generation/retrieval
-  - Challenge completion tracking
-  - Streak counting
-  - Daily leaderboard
+- [ ] Implement single-player modes
+  - Daily challenge
+    - Daily puzzle generation/retrieval
+    - Challenge completion tracking
+    - Streak counting
+    - Daily leaderboard
+  - Timed mode
+    - Timer functionality
+    - Progressive difficulty
+    - Score calculation
+    - Time-based leaderboards
+  - Endless mode
+    - Continuous chain generation
+    - Time extension mechanics
+    - High score tracking
+    - Difficulty progression
 
-- [ ] Create timed mode
-  - Timer functionality
-  - Progressive difficulty
-  - Score calculation
-  - Time-based leaderboards
-
-- [ ] Develop endless mode
-  - Continuous chain generation
-  - Time extension mechanics
-  - High score tracking
-  - Difficulty progression
-
-- [ ] Build versus mode
-  - Player matching
-  - Real-time game state synchronization
-  - Win/loss determination
-  - ELO rating adjustments
-
-- [ ] Implement tournament system
-  - Tournament creation
-  - Round management
-  - Participant tracking
-  - Results calculation
+- [ ] Implement multiplayer modes
+  - Versus mode
+    - Player matching
+    - Real-time game state synchronization
+    - Win/loss determination
+    - ELO rating adjustments
+  - Tournament system
+    - Tournament creation
+    - Round management
+    - Participant tracking
+    - Results calculation
 
 ## Social & Community Features
 
