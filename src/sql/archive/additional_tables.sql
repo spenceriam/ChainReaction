@@ -1,6 +1,16 @@
 -- Additional tables for ChainReaction game
 -- This script creates the remaining tables needed according to the PRD
 
+-- Create admin role function for policy use
+CREATE OR REPLACE FUNCTION public.users_with_admin_role()
+RETURNS SETOF UUID AS $$
+BEGIN
+  RETURN QUERY
+  SELECT id FROM auth.users
+  WHERE raw_user_meta_data->>'role' = 'admin';
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 -- Create daily_challenges table
 CREATE TABLE IF NOT EXISTS public.daily_challenges (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -23,7 +33,7 @@ CREATE POLICY "Public can view current and past daily challenges"
   FOR SELECT 
   USING (valid_date <= CURRENT_DATE);
 
--- Only admin users can create/update challenges (will be defined in a separate function)
+-- Only admin users can create/update challenges
 CREATE POLICY "Only admins can insert daily challenges" 
   ON public.daily_challenges 
   FOR INSERT 
@@ -325,16 +335,6 @@ CREATE POLICY "Only system can award badges"
   ON public.user_badges 
   FOR INSERT 
   WITH CHECK (auth.uid() IN (SELECT id FROM users_with_admin_role()));
-
--- Create admin role function for policy use
-CREATE OR REPLACE FUNCTION public.users_with_admin_role()
-RETURNS SETOF UUID AS $$
-BEGIN
-  RETURN QUERY
-  SELECT id FROM auth.users
-  WHERE raw_user_meta_data->>'role' = 'admin';
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- Create function to calculate score for a solution
 CREATE OR REPLACE FUNCTION calculate_solution_score(

@@ -3,6 +3,18 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## [0.1.0] - 2023-05-05
+
+### Added
 - Set up proper directory structure following development guidelines
 - Configured Tailwind CSS with proper configuration files
 - Created Supabase client utility for database connection
@@ -26,6 +38,9 @@
 - Created Row Level Security (RLS) policies for all database tables
 - Added database triggers for automatic statistics updates
 - Updated SQL documentation with setup instructions and examples
+- Created sample word dictionary with 100 carefully selected words and appropriate difficulty ratings
+- Added sample daily challenges for testing all game functionality
+- Improved database setup guide with testing instructions
 
 ### Changed
 - Improved Supabase client with additional configuration options and validation
@@ -37,6 +52,7 @@
 - Simplified authentication hooks to use direct Supabase client
 - Updated component structure to follow consistent architectural pattern
 - Enhanced SQL structure organization with separate files for clarity
+- Reorganized SQL scripts into modular files for better maintenance and troubleshooting
 
 ### Deprecated
 - None
@@ -49,20 +65,8 @@
 ### Fixed
 - Resolved TypeScript errors from conflicting architectural approaches
 - Fixed authentication flow to use consistent pattern
+- Fixed SQL function definition order to prevent dependency errors
+- Fixed SQL script syntax error by removing BEGIN/END transaction block that was causing issues with DDL statements
+- Created separate admin_role_fix.sql script to fix column name reference issue in users_with_admin_role function
+- Improved database setup with modular SQL scripts to isolate and fix issues with table creation and RLS policies
 
-## [1.0.0] - 2023-04-01
-
-### Added
-- Initial project setup.
-
-### Changed
-- None
-
-### Deprecated
-- None
-
-### Removed
-- None
-
-### Fixed
-- None

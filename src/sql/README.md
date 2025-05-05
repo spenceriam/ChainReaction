@@ -1,45 +1,68 @@
-# Supabase Database Setup
+# ChainReaction SQL Database Setup
 
-This directory contains SQL scripts for setting up the necessary database tables and functions for the ChainReaction application.
+This directory contains SQL scripts to set up the database for the ChainReaction word game.
 
-## How to Use
+## Database Schema Overview
 
-1. Log in to your Supabase dashboard at https://app.supabase.com
-2. Select your project
-3. Go to the SQL Editor
-4. Create a new query
-5. Copy and paste the contents of the SQL scripts in the following order:
-   - First run `setup_tables.sql` - Sets up base tables (profiles, words)
-   - Then run `additional_tables.sql` - Sets up game-specific tables and functions
-6. Click "Run" to execute the SQL
+The ChainReaction game uses several tables to track:
+- Daily challenges
+- User solutions
+- User statistics
+- Badges and achievements
+- Tournaments and matchups
 
-## Included Setup
+## Setup Instructions
 
-### Base Tables (`setup_tables.sql`)
+### Modular Setup (Recommended)
 
-1. **profiles table** - Extends the built-in auth.users table with additional user profile information
-2. **words table** - For storing the dictionary of valid words for the game
-3. **Row Level Security (RLS) policies** - Ensures data security by controlling access to rows in tables
-4. **Utility functions** - Helper functions like `get_schema_version()` for diagnostics and maintenance
+For the most reliable setup, use these scripts in the following order:
 
-### Game Tables (`additional_tables.sql`)
+1. `base_tables.sql` - Creates profiles and words tables
+2. `admin_role_fix_v2.sql` - Creates admin role function
+3. `daily_challenges.sql` - Creates daily challenges table
+4. `user_solutions.sql` - Creates user solutions table
+5. `functions.sql` - Creates utility functions
+6. `user_stats.sql` - Creates user stats table with triggers
+7. `populate_words.sql` - Adds sample words (optional but recommended)
+8. `sample_challenges.sql` - Adds sample challenges (optional but recommended)
 
-1. **daily_challenges** - Stores daily word chain challenges
-2. **user_solutions** - Records user solutions to challenges
-3. **tournaments** - Information about tournaments
-4. **tournament_participants** - Tracks who has joined each tournament
-5. **tournament_rounds** - Rounds within tournaments
-6. **round_matchups** - Player pairings within rounds
-7. **user_stats** - Aggregated statistics for users
-8. **badges** - Available achievements
-9. **user_badges** - Badges earned by users
+Follow the detailed instructions in `setup_guide.md` for step-by-step guidance.
 
-### Functions and Triggers
+### Initial Setup
 
-1. **users_with_admin_role()** - Helper function for RLS policies
-2. **calculate_solution_score()** - Calculates scores based on performance
-3. **update_user_stats_on_solution()** - Trigger function to maintain user stats
-4. **validate_word_chain()** - Validates that a word chain follows game rules
+If you're setting up a fresh database, you may also need to run:
+
+```sql
+-- Create the dictionary table
+CREATE TABLE IF NOT EXISTS public.dictionary (
+  word TEXT PRIMARY KEY,
+  word_length INTEGER GENERATED ALWAYS AS (length(word)) STORED,
+  popularity INTEGER DEFAULT 0
+);
+
+-- Add any additional base tables needed
+```
+
+## Maintenance
+
+After initial setup, you may need to:
+
+1. Add admin users:
+   ```sql
+   UPDATE auth.users
+   SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'
+   WHERE email = 'your-admin-email@example.com';
+   ```
+
+2. Add daily challenges:
+   ```sql
+   INSERT INTO daily_challenges (start_word, end_word, expected_chain_length, difficulty, valid_date)
+   VALUES ('word', 'game', 4, 3, CURRENT_DATE);
+   ```
+
+## Archive
+
+Deprecated scripts have been moved to the `archive` directory and should not be used.
 
 ## Verifying Setup
 
@@ -48,10 +71,18 @@ After running the setup scripts, you can verify it worked by:
 1. Checking the "Tables" section in your Supabase dashboard to see the new tables
 2. Running a SQL query to test the utility functions:
    ```sql
-   SELECT validate_word_chain(ARRAY['CHAIN', 'CHAIR', 'CHEER', 'SHEER', 'SHEEP', 'SLEEP', 'SLEPT', 'SWEPT', 'SWEET', 'TWEET', 'TWEEN', 'QUEEN', 'QUEST', 'GUEST', 'GUST', 'MUST', 'MUSE', 'FUSE', 'FUSS', 'MOSS', 'LOSS', 'LOST', 'LOFT', 'LIFT', 'GIFT', 'SIFT', 'SOFT', 'SORT', 'PORT', 'PART', 'MART', 'MARK', 'PARK', 'PERK', 'PEAK', 'PEAL', 'REAL', 'REEL', 'REEF', 'BEEF', 'BEER', 'BEET', 'BENT', 'RENT', 'REST', 'RUST', 'RUNT', 'HUNT', 'HINT', 'LINT', 'LINE', 'LONE', 'LONG', 'SONG', 'SUNG', 'LUNG', 'LUND', 'LAND', 'LARD', 'CARD', 'CURD', 'CURE', 'PURE', 'SURE', 'SERE', 'MERE', 'MARE', 'MALE', 'MOLE', 'HOLE', 'HOPE', 'HYPE', 'TYPE', 'TAPE', 'TAME', 'TARE', 'TIRE', 'TIDE', 'RIDE', 'RICE', 'RICH', 'RICK', 'RICK', 'PICK', 'PUCK', 'PECK', 'PEEK', 'SEEK', 'SEEM', 'SEEN', 'BEEN', 'BEER', 'BEES', 'FEES', 'FEDS', 'BEDS', 'BIDS', 'LIDS', 'LIES', 'LIEN', 'LIED', 'DIED', 'DIET', 'DIRT', 'DART', 'PART', 'PACT', 'FACT', 'FACE', 'PACE', 'PALE', 'POLE', 'POPE', 'ROPE', 'ROSE', 'RISE', 'RISK', 'DISK', 'DUSK', 'DUCK', 'LUCK', 'LICK', 'LINK', 'SINK', 'SINE', 'SITE', 'SIDE', 'RIDE', 'HIDE', 'HIKE', 'LIKE', 'LIVE', 'LOVE', 'MOVE', 'MORE', 'MARE', 'CARE', 'CARD', 'HARD', 'HARM', 'FARM', 'FORM', 'FORT', 'FORE', 'FIRE', 'HIRE', 'WIRE', 'WISE', 'WIPE', 'RIPE', 'RIFE', 'LIFE', 'LIFT', 'LIST', 'LAST', 'LUST', 'JUST', 'JEST', 'REST', 'PEST', 'PEAT', 'PENT', 'CENT', 'SENT', 'SEAT', 'SEAL', 'SEAM', 'SLAM', 'SLAP', 'SNAP', 'SNAG', 'STAG', 'STAR', 'SEAR', 'BEAR', 'HEAR', 'HEAP', 'HEAL', 'HELL', 'HELP', 'HEMP', 'HEMS', 'HEWS', 'JEWS', 'JAWS', 'JAMS', 'JABS', 'JOBS', 'JOTS', 'JETS', 'LETS', 'LETS', 'LENS', 'LEND', 'LAND', 'LANE', 'LATE', 'FATE', 'FADE', 'FAME', 'TAME', 'TIME', 'TILE', 'TILL', 'TELL', 'SELL', 'SEAL', 'MEAL', 'MEAT', 'MEET', 'MELT', 'MELD', 'MILD', 'MIND', 'MINT', 'HINT', 'HUNT', 'HURT', 'HURL', 'HULL', 'DULL', 'DOLL', 'DOLT', 'BOLT', 'BOAT', 'BEAT', 'BEAD', 'BEAM', 'REAM', 'REAP', 'LEAP', 'LEAK', 'LEAD', 'LOAD', 'LOAF', 'LOAN', 'LEAN', 'BEAN', 'BEAT', 'HEAT', 'FEAT', 'FEAR', 'NEAR', 'NEAT', 'NEST', 'BEST', 'BELT', 'MELT', 'MEET', 'FEET', 'FEED', 'WEED', 'WEEK', 'MEEK', 'MOCK', 'ROCK', 'RACK', 'RACE', 'LACE', 'LACK', 'PACK', 'BACK', 'BARK', 'DARK', 'DARE', 'CARE', 'CORE', 'CONE', 'HONE', 'HOME', 'HOSE', 'NOSE', 'NOTE', 'MOTE', 'MODE', 'CODE', 'COLD', 'CORD', 'WORD', 'WORK', 'WORM', 'WARM', 'WARD', 'CARD', 'CART', 'PART', 'PAST', 'PANT', 'PUNT', 'RUNT', 'RANT', 'RANK', 'RAND', 'WAND', 'WANT', 'WART', 'WARN', 'YARN', 'YAWN', 'PAWN', 'PAIN', 'PAIR', 'LAIR', 'LAIN', 'RAIN', 'RAID', 'RAIL', 'TAIL', 'TALL', 'TALK', 'WALK', 'WALL', 'MALL', 'MALT', 'SALT', 'SALTY', 'SALLY', 'RALLY', 'RAILS', 'SAILS', 'FAILS', 'FALLS', 'CALLS', 'CELLS', 'SELLS', 'SEEDS', 'REEDS', 'READS', 'READY', 'REACH', 'REACT']);
+   SELECT validate_word_chain(ARRAY['CAT', 'BAT', 'BED', 'RED']);
    
    SELECT calculate_solution_score(5, 120, 7, 3);
    ```
+
+## Troubleshooting
+
+If you need to check what's already set up in your database, run:
+```sql
+-- Check for existing tables and functions
+SELECT * FROM check_existing_tables.sql;
+```
 
 ## Next Steps
 
