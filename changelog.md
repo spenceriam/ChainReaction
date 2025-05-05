@@ -12,6 +12,7 @@
 - Created basic layout component with responsive design
 - Implemented simple WordChain game component with core game logic
 - Updated App component to use the new components and layout
+- Completely revised README.md with project description, features, and setup instructions
 
 ### Changed
 - None

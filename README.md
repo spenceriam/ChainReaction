@@ -1,46 +1,88 @@
-# Getting Started with Create React App
+# ChainReaction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ChainReaction is a competitive word puzzle game where players must complete word chains by finding the connecting words between a given start and end word. Each word in the chain differs from the adjacent word by exactly one letter. The game combines vocabulary skills with strategic thinking in a fast-paced, competitive environment.
+
+## Key Features
+
+- **Word Chain Puzzles**: Complete chains by finding words that differ by exactly one letter
+- **Multiple Game Modes**:
+  - Daily Challenge: One official puzzle per day (same for all players)
+  - Timed Mode: Complete chains as quickly as possible
+  - Endless Mode: Solve as many chains as possible within a set time
+  - Versus Mode: Head-to-head competition against other players
+  - Tournament Mode: Bracketed competition with elimination rounds
+- **Competitive Elements**: Leaderboards, achievements, and tournaments
+- **Social Features**: Player profiles, challenges, and social sharing
+
+## Tech Stack
+
+- **Frontend**: React with TypeScript, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Real-time**: Supabase Realtime for multiplayer functionality
+- **State Management**: Zustand
+- **Form Management**: React Hook Form
+- **Animations**: Framer Motion
+
+## Current Development Status
+
+ChainReaction is currently in early development. The following components have been implemented:
+
+- Project structure and configuration
+- Tailwind CSS setup
+- Supabase client utility
+- Authentication components and context
+- TypeScript interfaces for data model
+- Basic layout and UI components
+- Simple WordChain game component with core validation logic
+
+For detailed changes, please see the [Changelog](./changelog.md).
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- A Supabase account for backend services
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/ChainReaction.git
+cd ChainReaction
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory with your Supabase credentials:
+```
+REACT_APP_SUPABASE_URL=your-supabase-url
+REACT_APP_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+4. Start the development server:
+```bash
+npm start
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start`: Runs the app in development mode
+- `npm test`: Launches the test runner
+- `npm build`: Builds the app for production
+- `npm eject`: Ejects from Create React App configuration
 
-### `npm start`
+## Contributing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Contributions are welcome! Please check the [developer-todo.md](./developer-todo.md) file for the current development roadmap and areas that need implementation.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## License
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the MIT License - see the LICENSE file for details.
