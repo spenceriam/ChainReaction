@@ -42,6 +42,7 @@
 - Fixed infinite loop in WordChain component by using functional state updates
 - Improved AutoDemo component with useMemo to prevent recreation of solution chain on each render
 - Resolved all ESLint warnings in React hooks dependencies
+- Fixed issue with WordChain component where the first word could be changed, now ensuring input field starts after the first word
 
 ## [0.6.0] - 2024-05-05
 

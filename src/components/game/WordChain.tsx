@@ -11,7 +11,7 @@ export function WordChain({ startWord, endWord, chainLength, onComplete }: WordC
   const [chain, setChain] = useState<string[]>(Array(chainLength).fill(''));
   const [attempts, setAttempts] = useState(0);
   const [feedback, setFeedback] = useState<string[]>(Array(chainLength).fill(''));
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [inputValue, setInputValue] = useState('');
   const [isChainComplete, setIsChainComplete] = useState(false);
 
@@ -99,8 +99,8 @@ export function WordChain({ startWord, endWord, chainLength, onComplete }: WordC
         return newFeedback;
       });
       
-      // Move to the next empty position
-      const nextEmptyIndex = newChain.findIndex((word, idx) => idx !== 0 && idx !== chainLength - 1 && !word);
+      // Move to the next empty position, always skipping index 0 (the first word)
+      const nextEmptyIndex = newChain.findIndex((word, idx) => idx > 0 && idx !== chainLength - 1 && !word);
       if (nextEmptyIndex !== -1) {
         setCurrentIndex(nextEmptyIndex);
       }
