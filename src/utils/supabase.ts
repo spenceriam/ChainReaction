@@ -11,7 +11,16 @@ const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || '';
 
 // Validate environment variables are present
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase environment variables. Please check your .env file.');
+  const errorMessage = `
+    Missing Supabase environment variables. 
+    Please create a .env file in the root directory with:
+    
+    REACT_APP_SUPABASE_URL=your-supabase-project-url
+    REACT_APP_SUPABASE_ANON_KEY=your-supabase-anon-key
+    
+    See environment-setup.md for more details.
+  `;
+  console.error(errorMessage);
   throw new Error('Supabase environment variables are required');
 }
 

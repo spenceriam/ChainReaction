@@ -17,9 +17,12 @@
 - Added security utilities for user role-based access control
 - Created protected route hook for authenticated routes
 - Added database schema reference with Row Level Security policies
+- Created environment setup documentation
+- Updated .gitignore to exclude all environment files with sensitive information
 
 ### Changed
 - Improved Supabase client with additional configuration options and validation
+- Enhanced error messaging for missing environment variables
 
 ### Deprecated
 - None
