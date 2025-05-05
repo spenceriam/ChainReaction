@@ -10,8 +10,8 @@ Create a `.env.local` file in the root of your project with the following:
 
 ```
 # Supabase
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+APP_SUPABASE_URL=your-supabase-project-url
+APP_SUPABASE_ANON_KEY=your-supabase-anon-key
 
 # Application
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -24,8 +24,8 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 3. Go to Project Settings
 4. Click on "API" in the sidebar
 5. Under "Project API keys", you'll find:
-   - Project URL: Use this for `NEXT_PUBLIC_SUPABASE_URL`
-   - `anon` `public` key: Use this for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - Project URL: Use this for `APP_SUPABASE_URL`
+   - `anon` `public` key: Use this for `APP_SUPABASE_ANON_KEY`
 
 ## Application URL
 

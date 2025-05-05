@@ -3,11 +3,11 @@ import { createClient } from '@supabase/supabase-js';
 /**
  * Environment variables for Supabase connection
  * These must be set in .env file in the root of the project:
- * REACT_APP_SUPABASE_URL=your-supabase-url
- * REACT_APP_SUPABASE_ANON_KEY=your-supabase-anon-key
+ * APP_SUPABASE_URL=your-supabase-url
+ * APP_SUPABASE_ANON_KEY=your-supabase-anon-key
  */
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || '';
+const supabaseUrl = process.env.APP_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.APP_SUPABASE_ANON_KEY || '';
 
 // Validate environment variables are present
 if (!supabaseUrl || !supabaseAnonKey) {
@@ -15,8 +15,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
     Missing Supabase environment variables. 
     Please create a .env file in the root directory with:
     
-    REACT_APP_SUPABASE_URL=your-supabase-project-url
-    REACT_APP_SUPABASE_ANON_KEY=your-supabase-anon-key
+    APP_SUPABASE_URL=your-supabase-project-url
+    APP_SUPABASE_ANON_KEY=your-supabase-anon-key
     
     See environment-setup.md for more details.
   `;
