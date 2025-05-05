@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Integrated bottom navigation bar for mobile devices with icon-based navigation
 - Added "How to Play", "Game Modes", "Profile", and "Leaderboard" overlay panels
 - Created SupabaseConnectionStatus component to monitor and display Supabase connection status
+- Added test-connection.ts utility script to verify Supabase connection from command line
+- Created debug page for testing Supabase connection in the browser
 
 ### Changed
 - Optimized game mode components for better performance
@@ -42,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced the overall UI to be more similar to wordly.org's clean interface
 - Standardized Supabase client configuration across all files to use APP_SUPABASE_URL and APP_SUPABASE_ANON_KEY consistently
 - Enhanced error handling for missing Supabase environment variables in all client implementations
+- Fixed cookie handling in middleware.ts and supabase-server.ts to use correct Next.js API patterns
 
 ### Deprecated
 - None
@@ -63,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Resolved all ESLint warnings in React hooks dependencies
 - Fixed issue with WordChain component where the first word could be changed, now ensuring input field starts after the first word
 - Updated Supabase import paths in game components that were referencing the removed supabaseClient.ts file
+- Fixed cookie handling in middleware.ts and server-side Supabase client to use correct Next.js pattern
 
 ## [0.6.0] - 2024-05-05
 
