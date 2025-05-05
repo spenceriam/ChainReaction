@@ -23,6 +23,7 @@
 - Refined user interface for consistency across all components
 - Replaced interactive demo with automated visual demo and added both to landing page
 - Enhanced AutoDemo component with continuous looping and clearer explanations
+- Improved user onboarding by replacing the difficult example WordChain (CHAIN→REACT) with an easier challenge (CAT→DOG)
 
 ### Deprecated
 - None

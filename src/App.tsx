@@ -63,7 +63,7 @@ function Home() {
       
       <div className="mt-8">
         <h2 className="text-xl font-bold mb-4">Ready to Try? Give it a go:</h2>
-        <WordChain startWord="CHAIN" endWord="REACT" chainLength={5} />
+        <WordChain startWord="CAT" endWord="DOG" chainLength={4} />
       </div>
     </div>
   );
