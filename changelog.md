@@ -3,14 +3,35 @@
 ## [Unreleased]
 
 ### Added
+- Completed all Phase 1 development priorities
+- Updated developer-todo.md to reflect completed tasks
+- Enhanced user profile statistics display
+- Added game history placeholders for future updates
+- Implemented comprehensive leaderboard functionality across all game modes
+- Created comprehensive test plan with manual sanity checks and formal testing strategy
+- Added detailed test cases for all game modes and features
+- Defined testing schedule and reporting methodology
+- Created supabase-server.ts utility for server-side Supabase client
+- Added supabase-browser.ts for browser-side Supabase client
+- Implemented middleware.ts with proper authentication flow
 
 ### Changed
+- Optimized game mode components for better performance
+- Updated navigation to improve user flow between game modes
+- Refined user interface for consistency across all components
 
 ### Deprecated
+- None
 
 ### Removed
+- None
 
 ### Fixed
+- Fixed dates in changelog entries
+- Corrected task status in developer-todo.md
+- Fixed missing Supabase server client module error
+- Resolved ESLint warnings in TimedMode and WordChain components by adding proper dependency arrays
+- Fixed saveScore function ordering in TimedMode
 
 ## [0.6.0] - 2024-05-05
 

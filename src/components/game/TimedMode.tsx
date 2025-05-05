@@ -86,23 +86,6 @@ export function TimedMode() {
     generateNewChain();
   }, [generateNewChain]);
   
-  // Timer countdown
-  useEffect(() => {
-    if (isGameOver || timeRemaining <= 0) {
-      if (timeRemaining <= 0) {
-        setIsGameOver(true);
-        saveScore();
-      }
-      return;
-    }
-    
-    const timer = setInterval(() => {
-      setTimeRemaining(prev => prev - 1);
-    }, 1000);
-    
-    return () => clearInterval(timer);
-  }, [timeRemaining, isGameOver]);
-  
   // Save the score to the database when game is over
   const saveScore = async () => {
     try {
@@ -129,6 +112,23 @@ export function TimedMode() {
       console.error('Error saving score:', err);
     }
   };
+  
+  // Timer countdown
+  useEffect(() => {
+    if (isGameOver || timeRemaining <= 0) {
+      if (timeRemaining <= 0) {
+        setIsGameOver(true);
+        saveScore();
+      }
+      return;
+    }
+    
+    const timer = setInterval(() => {
+      setTimeRemaining(prev => prev - 1);
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, [timeRemaining, isGameOver, saveScore]);
   
   // Handle chain completion
   const handleChainComplete = () => {

@@ -21,7 +21,7 @@ export function WordChain({ startWord, endWord, chainLength, onComplete }: WordC
     newChain[0] = startWord;
     newChain[chainLength - 1] = endWord;
     setChain(newChain);
-  }, [startWord, endWord, chainLength]);
+  }, [startWord, endWord, chainLength, chain]);
 
   // Check for chain completion
   useEffect(() => {
