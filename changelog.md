@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added SimpleWordChain component with cleaner, mobile-optimized UI
 - Integrated bottom navigation bar for mobile devices with icon-based navigation
 - Added "How to Play", "Game Modes", "Profile", and "Leaderboard" overlay panels
+- Created SupabaseConnectionStatus component to monitor and display Supabase connection status
 
 ### Changed
 - Optimized game mode components for better performance
@@ -39,12 +40,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restructured the Home component to better showcase the game
 - Improved feedback system with clear success/error states
 - Enhanced the overall UI to be more similar to wordly.org's clean interface
+- Standardized Supabase client configuration across all files to use APP_SUPABASE_URL and APP_SUPABASE_ANON_KEY consistently
+- Enhanced error handling for missing Supabase environment variables in all client implementations
 
 ### Deprecated
 - None
 
 ### Removed
-- None
+- Removed duplicate supabaseClient.ts file to standardize on the main supabase.ts implementation
 
 ### Fixed
 - Fixed dates in changelog entries
@@ -59,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved AutoDemo component with useMemo to prevent recreation of solution chain on each render
 - Resolved all ESLint warnings in React hooks dependencies
 - Fixed issue with WordChain component where the first word could be changed, now ensuring input field starts after the first word
+- Updated Supabase import paths in game components that were referencing the removed supabaseClient.ts file
 
 ## [0.6.0] - 2024-05-05
 

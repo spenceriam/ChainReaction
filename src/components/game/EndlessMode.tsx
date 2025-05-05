@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { WordChain } from './WordChain';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils/supabase';
 
 interface WordChainConfig {
   startWord: string;

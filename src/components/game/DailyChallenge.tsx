@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { WordChain } from './WordChain';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../utils/supabase';
 
 interface Challenge {
   id: string;
