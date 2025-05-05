@@ -17,11 +17,15 @@ export function WordChain({ startWord, endWord, chainLength, onComplete }: WordC
 
   // Initialize the chain with start and end words
   useEffect(() => {
-    const newChain = [...chain];
-    newChain[0] = startWord;
-    newChain[chainLength - 1] = endWord;
-    setChain(newChain);
-  }, [startWord, endWord, chainLength, chain]);
+    // Use a functional update to avoid needing 'chain' in the dependency array
+    setChain(prevChain => {
+      // Only update if the start/end words or chain length have changed
+      const newChain = [...prevChain];
+      newChain[0] = startWord;
+      newChain[chainLength - 1] = endWord;
+      return newChain;
+    });
+  }, [startWord, endWord, chainLength]); // ESLint will be happy with this
 
   // Check for chain completion
   useEffect(() => {

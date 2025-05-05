@@ -15,11 +15,14 @@
 - Added supabase-browser.ts for browser-side Supabase client
 - Implemented middleware.ts with proper authentication flow
 - Added interactive demo section to the landing page showing how the word chain game works
+- Implemented automated word chain demo that visually demonstrates the game mechanics with auto-looping functionality
 
 ### Changed
 - Optimized game mode components for better performance
 - Updated navigation to improve user flow between game modes
 - Refined user interface for consistency across all components
+- Replaced interactive demo with automated visual demo and added both to landing page
+- Enhanced AutoDemo component with continuous looping and clearer explanations
 
 ### Deprecated
 - None
@@ -36,6 +39,9 @@
 - Fixed TypeScript errors in Supabase server client and middleware
 - Wrapped saveScore function in useCallback to prevent unnecessary renders
 - Simplified Supabase cookie handling to fix type compatibility issues
+- Fixed infinite loop in WordChain component by using functional state updates
+- Improved AutoDemo component with useMemo to prevent recreation of solution chain on each render
+- Resolved all ESLint warnings in React hooks dependencies
 
 ## [0.6.0] - 2024-05-05
 

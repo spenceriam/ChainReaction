@@ -8,6 +8,7 @@ import { DailyChallengePage } from './pages/DailyChallengePage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { TimedModePage } from './pages/TimedModePage';
 import { EndlessModePage } from './pages/EndlessModePage';
+import { AutoDemo } from './components/demo/AutoDemo';
 
 function Home() {
   return (
@@ -56,7 +57,12 @@ function Home() {
       <SimpleConnectionTest />
       
       <div className="mt-6">
-        <h2 className="text-xl font-bold mb-4">Try the Demo:</h2>
+        <h2 className="text-xl font-bold mb-4">See How It Works:</h2>
+        <AutoDemo demoSpeed={2500} />
+      </div>
+      
+      <div className="mt-8">
+        <h2 className="text-xl font-bold mb-4">Ready to Try? Give it a go:</h2>
         <WordChain startWord="CHAIN" endWord="REACT" chainLength={5} />
       </div>
     </div>
