@@ -12,6 +12,32 @@
 
 ### Fixed
 
+## [0.4.0] - 2025-05-05
+
+### Added
+- Implemented Timed Mode feature with progressive difficulty
+- Created TimedMode component with countdown timer functionality
+- Added score and level tracking for Timed Mode
+- Implemented time extension mechanics based on difficulty
+- Created SQL functions for saving and retrieving timed mode scores
+- Added Timed Mode leaderboard to track high scores
+- Enhanced Leaderboard component to support multiple game modes
+
+### Changed
+- Updated Leaderboard component to handle different data types
+- Enhanced LeaderboardPage with additional tab for Timed Mode
+- Updated navigation to include Timed Mode
+- Improved home page with links to all available game modes
+
+### Deprecated
+- None
+
+### Removed
+- None
+
+### Fixed
+- None
+
 ## [0.3.0] - 2025-05-05
 
 ### Added

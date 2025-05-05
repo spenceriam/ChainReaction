@@ -11,11 +11,12 @@ The following tasks are prioritized for Phase 1 completion:
    - [x] Game interface components
    - [ ] Game mode screens (single-player only)
      - [x] Daily challenge
-     - [ ] Timed mode
+     - [x] Timed mode
      - [ ] Endless mode
    - [ ] Leaderboard views (single-player only)
      - [x] Daily leaderboard
      - [x] Weekly leaderboard
+     - [x] Timed mode leaderboard
    - [ ] Player profile components
      - [ ] Statistics display
      - [ ] Game history
@@ -27,11 +28,11 @@ The following tasks are prioritized for Phase 1 completion:
        - [x] Challenge completion tracking
        - [x] Streak counting
        - [x] Daily leaderboard
-     - [ ] Timed mode
-       - [ ] Timer functionality
-       - [ ] Progressive difficulty
-       - [ ] Score calculation
-       - [ ] Time-based leaderboards
+     - [x] Timed mode
+       - [x] Timer functionality
+       - [x] Progressive difficulty
+       - [x] Score calculation
+       - [x] Time-based leaderboards
      - [ ] Endless mode
        - [ ] Continuous chain generation
        - [ ] Time extension mechanics

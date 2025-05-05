@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Leaderboard } from '../components/game/Leaderboard';
 
 export function LeaderboardPage() {
-  const [activeTab, setActiveTab] = useState<'daily' | 'weekly'>('daily');
+  const [activeTab, setActiveTab] = useState<'daily' | 'weekly' | 'timed'>('daily');
   
   return (
     <div className="container mx-auto px-4 py-8">
@@ -10,7 +10,7 @@ export function LeaderboardPage() {
       
       <div className="mb-6">
         <div className="border-b border-gray-200">
-          <nav className="-mb-px flex">
+          <nav className="flex flex-wrap -mb-px">
             <button
               onClick={() => setActiveTab('daily')}
               className={`py-2 px-4 text-center border-b-2 font-medium text-sm ${
@@ -23,7 +23,7 @@ export function LeaderboardPage() {
             </button>
             <button
               onClick={() => setActiveTab('weekly')}
-              className={`ml-8 py-2 px-4 text-center border-b-2 font-medium text-sm ${
+              className={`py-2 px-4 text-center border-b-2 font-medium text-sm ${
                 activeTab === 'weekly'
                   ? 'border-blue-500 text-blue-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -31,22 +31,43 @@ export function LeaderboardPage() {
             >
               Weekly Rankings
             </button>
+            <button
+              onClick={() => setActiveTab('timed')}
+              className={`py-2 px-4 text-center border-b-2 font-medium text-sm ${
+                activeTab === 'timed'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Timed Mode
+            </button>
           </nav>
         </div>
       </div>
       
-      {activeTab === 'daily' ? (
+      {activeTab === 'daily' && (
         <div>
           <Leaderboard type="daily" limit={20} />
           <p className="mt-4 text-sm text-gray-500">
             Rankings for today's daily challenge. New challenge available every day at midnight!
           </p>
         </div>
-      ) : (
+      )}
+      
+      {activeTab === 'weekly' && (
         <div>
           <Leaderboard type="weekly" limit={20} />
           <p className="mt-4 text-sm text-gray-500">
             Rankings based on total points earned from daily challenges this week.
+          </p>
+        </div>
+      )}
+      
+      {activeTab === 'timed' && (
+        <div>
+          <Leaderboard type="timed" limit={20} />
+          <p className="mt-4 text-sm text-gray-500">
+            Rankings based on highest scores in Timed Mode. Complete more chains before time runs out!
           </p>
         </div>
       )}

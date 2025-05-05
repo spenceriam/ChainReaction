@@ -41,6 +41,16 @@ export function Layout({ children }: LayoutProps) {
                   Daily Challenge
                 </Link>
                 <Link
+                  to="/timed-mode"
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    location.pathname === '/timed-mode'
+                      ? 'bg-blue-100 text-blue-800'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  Timed Mode
+                </Link>
+                <Link
                   to="/leaderboard"
                   className={`px-3 py-2 rounded-md text-sm font-medium ${
                     location.pathname === '/leaderboard'
@@ -93,6 +103,16 @@ export function Layout({ children }: LayoutProps) {
                 }`}
               >
                 Daily
+              </Link>
+              <Link
+                to="/timed-mode"
+                className={`px-3 py-1 rounded-md text-sm ${
+                  location.pathname === '/timed-mode'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                Timed
               </Link>
               <Link
                 to="/leaderboard"

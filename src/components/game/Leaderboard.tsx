@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../utils/supabaseClient';
 
-interface LeaderboardEntry {
+interface DailyLeaderboardEntry {
   username: string;
   user_id: string;
   completion_time: number;
@@ -9,8 +9,25 @@ interface LeaderboardEntry {
   attempts: number;
 }
 
+interface TimedLeaderboardEntry {
+  username: string;
+  user_id: string;
+  high_score: number;
+  best_level: number;
+  games_played: number;
+}
+
+interface WeeklyLeaderboardEntry {
+  username: string;
+  user_id: string;
+  total_score: number;
+  challenges_completed: number;
+}
+
+type LeaderboardEntry = DailyLeaderboardEntry | TimedLeaderboardEntry | WeeklyLeaderboardEntry;
+
 interface LeaderboardProps {
-  type?: 'daily' | 'weekly';
+  type?: 'daily' | 'weekly' | 'timed';
   limit?: number;
 }
 
@@ -35,10 +52,17 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
             
           if (error) throw error;
           query = data;
-        } else {
+        } else if (type === 'weekly') {
           // Get leaderboard for this week
           const { data, error } = await supabase
             .rpc('get_weekly_leaderboard', { entries_limit: limit });
+            
+          if (error) throw error;
+          query = data;
+        } else if (type === 'timed') {
+          // Get timed mode leaderboard
+          const { data, error } = await supabase
+            .rpc('get_timed_leaderboard', { entries_limit: limit });
             
           if (error) throw error;
           query = data;
@@ -85,7 +109,7 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <h2 className="text-xl font-bold p-4 bg-blue-50">
-        {type === 'daily' ? 'Daily' : 'Weekly'} Leaderboard
+        {type === 'daily' ? 'Daily' : type === 'weekly' ? 'Weekly' : 'Timed Mode'} Leaderboard
       </h2>
       
       <table className="min-w-full divide-y divide-gray-200">
@@ -97,12 +121,39 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Player
             </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Time
-            </th>
-            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Attempts
-            </th>
+            {type === 'daily' && (
+              <>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Time
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Attempts
+                </th>
+              </>
+            )}
+            {type === 'weekly' && (
+              <>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Score
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Challenges
+                </th>
+              </>
+            )}
+            {type === 'timed' && (
+              <>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Score
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Level
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Games
+                </th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -120,12 +171,42 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
                   </div>
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {formatTime(entry.completion_time)}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {entry.attempts}
-              </td>
+              
+              {type === 'daily' && 'completion_time' in entry && (
+                <>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {formatTime(entry.completion_time)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.attempts}
+                  </td>
+                </>
+              )}
+              
+              {type === 'weekly' && 'total_score' in entry && (
+                <>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.total_score}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.challenges_completed}
+                  </td>
+                </>
+              )}
+              
+              {type === 'timed' && 'high_score' in entry && (
+                <>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.high_score}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.best_level}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.games_played}
+                  </td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>

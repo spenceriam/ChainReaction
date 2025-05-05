@@ -6,6 +6,7 @@ import { WordChain } from './components/game/WordChain';
 import { SimpleConnectionTest } from './components/common/SimpleConnectionTest';
 import { DailyChallengePage } from './pages/DailyChallengePage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
+import { TimedModePage } from './pages/TimedModePage';
 
 function Home() {
   return (
@@ -28,6 +29,12 @@ function Home() {
             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
           >
             Play Daily Challenge
+          </Link>
+          <Link 
+            to="/timed-mode" 
+            className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 text-center"
+          >
+            Try Timed Mode
           </Link>
           <Link 
             to="/leaderboard" 
@@ -57,6 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/daily-challenge" element={<DailyChallengePage />} />
+            <Route path="/timed-mode" element={<TimedModePage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
           </Routes>
         </Layout>
