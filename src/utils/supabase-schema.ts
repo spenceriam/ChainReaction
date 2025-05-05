@@ -4,6 +4,9 @@
  * and documenting Row Level Security (RLS) policies
  */
 
+// Export a constant to make this a proper TypeScript module
+export const SCHEMA_VERSION = '1.0.0';
+
 /**
  * users table (extends Supabase auth.users)
  * 

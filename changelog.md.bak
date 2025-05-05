@@ -3,66 +3,6 @@
 ## [Unreleased]
 
 ### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-## [0.3.0] - 2025-05-05
-
-### Added
-- Created DailyChallenge component for displaying the daily word chain challenge
-- Implemented Leaderboard component for displaying user rankings
-- Added DailyChallengePage and LeaderboardPage components
-- Created SQL functions for leaderboard functionality
-- Implemented scoring system based on completion time and attempts
-- Added navigation between pages with React Router
-- Enhanced layout with responsive navigation menu
-- Created user stats tracking system
-
-### Changed
-- Updated WordChain component to support completion callbacks
-- Modified App component to use React Router for navigation
-- Improved Layout component with navigation links and footer
-- Enhanced home page with links to daily challenge and leaderboards
-
-### Deprecated
-- None
-
-### Removed
-- None
-
-### Fixed
-- None
-
-## [0.2.0] - 2025-05-05
-
-### Added
-- Defined Phase 1 development priorities focusing on core single-player experience
-- Created detailed checklist for Phase 1 completion tasks
-- Refined frontend component requirements to focus on single-player features
-
-### Changed
-- Restructured development roadmap to prioritize single-player experience before multiplayer features
-- Updated game mode implementation plan to complete single-player modes first
-- Deferred multiplayer features, social features, and premium features to Phase 2
-
-### Deprecated
-- None
-
-### Removed
-- None
-
-### Fixed
-- None
-
-## [0.1.0] - 2025-05-05
-
-### Added
 - Set up proper directory structure following development guidelines
 - Configured Tailwind CSS with proper configuration files
 - Created Supabase client utility for database connection
@@ -86,9 +26,6 @@
 - Created Row Level Security (RLS) policies for all database tables
 - Added database triggers for automatic statistics updates
 - Updated SQL documentation with setup instructions and examples
-- Created sample word dictionary with 100 carefully selected words and appropriate difficulty ratings
-- Added sample daily challenges for testing all game functionality
-- Improved database setup guide with testing instructions
 
 ### Changed
 - Improved Supabase client with additional configuration options and validation
@@ -100,7 +37,6 @@
 - Simplified authentication hooks to use direct Supabase client
 - Updated component structure to follow consistent architectural pattern
 - Enhanced SQL structure organization with separate files for clarity
-- Reorganized SQL scripts into modular files for better maintenance and troubleshooting
 
 ### Deprecated
 - None
@@ -113,8 +49,20 @@
 ### Fixed
 - Resolved TypeScript errors from conflicting architectural approaches
 - Fixed authentication flow to use consistent pattern
-- Fixed SQL function definition order to prevent dependency errors
-- Fixed SQL script syntax error by removing BEGIN/END transaction block that was causing issues with DDL statements
-- Created separate admin_role_fix.sql script to fix column name reference issue in users_with_admin_role function
-- Improved database setup with modular SQL scripts to isolate and fix issues with table creation and RLS policies
 
+## [1.0.0] - 2023-04-01
+
+### Added
+- Initial project setup.
+
+### Changed
+- None
+
+### Deprecated
+- None
+
+### Removed
+- None
+
+### Fixed
+- None

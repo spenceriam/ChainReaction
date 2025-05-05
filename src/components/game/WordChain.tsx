@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface WordChainProps {
   startWord: string;
   endWord: string;
   chainLength: number;
+  onComplete?: () => void;
 }
 
-export function WordChain({ startWord, endWord, chainLength }: WordChainProps) {
+export function WordChain({ startWord, endWord, chainLength, onComplete }: WordChainProps) {
   const [chain, setChain] = useState<string[]>(Array(chainLength).fill(''));
   const [attempts, setAttempts] = useState(0);
   const [feedback, setFeedback] = useState<string[]>(Array(chainLength).fill(''));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [inputValue, setInputValue] = useState('');
+  const [isChainComplete, setIsChainComplete] = useState(false);
 
   // Initialize the chain with start and end words
-  React.useEffect(() => {
+  useEffect(() => {
     const newChain = [...chain];
     newChain[0] = startWord;
     newChain[chainLength - 1] = endWord;
     setChain(newChain);
   }, [startWord, endWord, chainLength]);
+
+  // Check for chain completion
+  useEffect(() => {
+    const complete = chain.every(word => word !== '');
+    setIsChainComplete(complete);
+    
+    if (complete && !isChainComplete && onComplete) {
+      onComplete();
+    }
+  }, [chain, isChainComplete, onComplete]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value.toUpperCase());
@@ -98,8 +110,6 @@ export function WordChain({ startWord, endWord, chainLength }: WordChainProps) {
       });
     }
   };
-
-  const isChainComplete = chain.every(word => word !== '');
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow">
