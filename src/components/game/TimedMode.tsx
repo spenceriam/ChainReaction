@@ -87,7 +87,7 @@ export function TimedMode() {
   }, [generateNewChain]);
   
   // Save the score to the database when game is over
-  const saveScore = async () => {
+  const saveScore = useCallback(async () => {
     try {
       const user = (await supabase.auth.getUser()).data.user;
       
@@ -111,7 +111,7 @@ export function TimedMode() {
     } catch (err) {
       console.error('Error saving score:', err);
     }
-  };
+  }, [score, level, chainsCompleted]);
   
   // Timer countdown
   useEffect(() => {

@@ -32,6 +32,9 @@
 - Fixed missing Supabase server client module error
 - Resolved ESLint warnings in TimedMode and WordChain components by adding proper dependency arrays
 - Fixed saveScore function ordering in TimedMode
+- Fixed TypeScript errors in Supabase server client and middleware
+- Wrapped saveScore function in useCallback to prevent unnecessary renders
+- Simplified Supabase cookie handling to fix type compatibility issues
 
 ## [0.6.0] - 2024-05-05
 
@@ -41,6 +44,12 @@
 - Enhanced user profile statistics display
 - Added game history placeholders for future updates
 - Implemented comprehensive leaderboard functionality across all game modes
+- Created comprehensive test plan with manual sanity checks and formal testing strategy
+- Added detailed test cases for all game modes and features
+- Defined testing schedule and reporting methodology
+- Created supabase-server.ts utility for server-side Supabase client
+- Added supabase-browser.ts for browser-side Supabase client
+- Implemented middleware.ts with proper authentication flow
 
 ### Changed
 - Optimized game mode components for better performance
@@ -56,6 +65,9 @@
 ### Fixed
 - Fixed dates in changelog entries
 - Corrected task status in developer-todo.md
+- Fixed missing Supabase server client module error
+- Resolved ESLint warnings in TimedMode and WordChain components by adding proper dependency arrays
+- Fixed saveScore function ordering in TimedMode
 
 ## [0.5.0] - 2024-05-05
 
