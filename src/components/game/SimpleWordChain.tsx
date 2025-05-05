@@ -5,9 +5,16 @@ interface SimpleWordChainProps {
   endWord: string;
   chainLength: number;
   onComplete?: (attempts: number, time: number) => void;
+  darkMode?: boolean;
 }
 
-export function SimpleWordChain({ startWord, endWord, chainLength, onComplete }: SimpleWordChainProps) {
+export function SimpleWordChain({ 
+  startWord, 
+  endWord, 
+  chainLength, 
+  onComplete,
+  darkMode = true
+}: SimpleWordChainProps) {
   const [chain, setChain] = useState<string[]>(Array(chainLength).fill(''));
   const [attempts, setAttempts] = useState(0);
   const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -17,6 +24,23 @@ export function SimpleWordChain({ startWord, endWord, chainLength, onComplete }:
   const [isChainComplete, setIsChainComplete] = useState(false);
   const [startTime, setStartTime] = useState<number>(Date.now());
   const [elapsedTime, setElapsedTime] = useState(0);
+
+  // Theme classes
+  const themeClasses = {
+    text: darkMode ? 'text-gray-100' : 'text-gray-900',
+    subtext: darkMode ? 'text-gray-400' : 'text-gray-600',
+    inputBg: darkMode ? 'bg-gray-800' : 'bg-white',
+    inputBorder: darkMode ? 'border-gray-700' : 'border-gray-300',
+    inputFocus: darkMode ? 'focus:ring-blue-500 focus:border-blue-500' : 'focus:ring-blue-500',
+    buttonPrimary: darkMode ? 'bg-blue-700 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700',
+    wordStart: darkMode ? 'bg-green-800 text-green-100' : 'bg-green-100 text-green-800',
+    wordEnd: darkMode ? 'bg-red-800 text-red-100' : 'bg-red-100 text-red-800',
+    wordFilled: darkMode ? 'bg-blue-800 text-blue-100' : 'bg-blue-100 text-blue-800',
+    wordEmpty: darkMode ? 'bg-gray-800 text-gray-400' : 'bg-gray-100 text-gray-400',
+    feedbackSuccess: darkMode ? 'bg-green-900 text-green-100' : 'bg-green-50 text-green-800',
+    feedbackError: darkMode ? 'bg-red-900 text-red-100' : 'bg-red-50 text-red-800',
+    feedbackWarning: darkMode ? 'bg-yellow-900 text-yellow-100' : 'bg-yellow-50 text-yellow-800',
+  };
 
   // Initialize the chain with start and end words
   useEffect(() => {
@@ -135,11 +159,11 @@ export function SimpleWordChain({ startWord, endWord, chainLength, onComplete }:
   return (
     <div className="w-full max-w-sm mx-auto">
       {/* Game status bar */}
-      <div className="flex justify-between items-center mb-4 text-sm">
-        <div className="text-gray-600">
+      <div className={`flex justify-between items-center mb-4 text-sm ${themeClasses.text}`}>
+        <div>
           Attempts: <span className="font-bold">{attempts}</span>
         </div>
-        <div className="text-gray-600">
+        <div>
           Time: <span className="font-bold">{elapsedTime}s</span>
         </div>
       </div>
@@ -149,16 +173,16 @@ export function SimpleWordChain({ startWord, endWord, chainLength, onComplete }:
         {chain.map((word, index) => (
           <div key={index} className="flex items-center">
             {/* Position indicator */}
-            <div className="w-8 text-center text-sm text-gray-500">
+            <div className={`w-8 text-center text-sm ${themeClasses.subtext}`}>
               {index === 0 ? 'Start' : index === chainLength - 1 ? 'End' : `#${index}`}
             </div>
             
             {/* Word box */}
             <div 
               className={`flex-1 h-12 flex items-center justify-center rounded-md font-bold text-xl ${
-                index === 0 ? 'bg-green-100 text-green-800' : 
-                index === chainLength - 1 ? 'bg-red-100 text-red-800' : 
-                word ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-400'
+                index === 0 ? themeClasses.wordStart : 
+                index === chainLength - 1 ? themeClasses.wordEnd : 
+                word ? themeClasses.wordFilled : themeClasses.wordEmpty
               }`}
             >
               {word || (index === currentIndex && !isChainComplete ? '_' : '?')}
@@ -175,14 +199,14 @@ export function SimpleWordChain({ startWord, endWord, chainLength, onComplete }:
               type="text"
               value={inputValue}
               onChange={handleInputChange}
-              className="flex-1 h-12 px-4 border border-gray-300 rounded-l-md text-lg uppercase focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`flex-1 h-12 px-4 border ${themeClasses.inputBg} ${themeClasses.inputBorder} rounded-l-md text-lg uppercase focus:outline-none focus:ring-2 ${themeClasses.inputFocus} ${themeClasses.text}`}
               placeholder={`Enter ${startWord.length}-letter word`}
               aria-label={`Enter ${startWord.length}-letter word`}
               maxLength={startWord.length}
             />
             <button 
               type="submit"
-              className="bg-blue-600 text-white px-6 py-3 rounded-r-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`${themeClasses.buttonPrimary} text-white px-6 py-3 rounded-r-md font-medium focus:outline-none focus:ring-2 focus:ring-blue-500`}
             >
               Try
             </button>
@@ -193,9 +217,9 @@ export function SimpleWordChain({ startWord, endWord, chainLength, onComplete }:
       {/* Feedback message */}
       {feedbackMessage && (
         <div className={`p-3 rounded-md text-center ${
-          feedbackType === 'success' ? 'bg-green-50 text-green-800' : 
-          feedbackType === 'error' ? 'bg-red-50 text-red-800' : 
-          feedbackType === 'warning' ? 'bg-yellow-50 text-yellow-800' : ''
+          feedbackType === 'success' ? themeClasses.feedbackSuccess : 
+          feedbackType === 'error' ? themeClasses.feedbackError : 
+          feedbackType === 'warning' ? themeClasses.feedbackWarning : ''
         }`}>
           {feedbackMessage}
         </div>
@@ -203,12 +227,12 @@ export function SimpleWordChain({ startWord, endWord, chainLength, onComplete }:
       
       {/* Completion message */}
       {isChainComplete && (
-        <div className="mt-8 p-4 bg-green-100 text-green-800 rounded-md text-center">
+        <div className={`mt-8 p-4 ${themeClasses.feedbackSuccess} rounded-md text-center`}>
           <h3 className="font-bold text-xl mb-2">Chain Complete! 🎉</h3>
           <p>You solved it in {attempts} attempts and {elapsedTime} seconds.</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 bg-green-600 text-white px-6 py-2 rounded-md font-medium hover:bg-green-700"
+            className={`mt-4 ${themeClasses.buttonPrimary} text-white px-6 py-2 rounded-md font-medium`}
           >
             Play Again
           </button>

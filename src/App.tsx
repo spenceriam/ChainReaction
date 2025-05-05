@@ -8,26 +8,31 @@ import { DailyChallengePage } from './pages/DailyChallengePage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { TimedModePage } from './pages/TimedModePage';
 import { EndlessModePage } from './pages/EndlessModePage';
-import { AutoDemo } from './components/demo/AutoDemo';
+
+// Dark mode setting
+const DARK_MODE = true;
 
 function Home() {
   return (
-    <div className="flex flex-col items-center p-4 pt-6">
-      <div className="w-full max-w-md bg-white shadow rounded-lg p-6 mb-20">
-        <h1 className="text-2xl font-bold text-center text-gray-900 mb-6">ChainReaction</h1>
+    <div className="flex flex-col items-center p-4 pt-8">
+      <div className={`w-full max-w-md ${DARK_MODE ? 'bg-gray-800 shadow-lg' : 'bg-white shadow'} rounded-lg p-6 mb-20`}>
+        <h1 className={`text-2xl font-bold text-center ${DARK_MODE ? 'text-blue-300' : 'text-gray-900'} mb-6`}>
+          ChainReaction
+        </h1>
         
-        {/* Main game area using SimpleWordChain */}
+        {/* Main game area using SimpleWordChain with dark mode */}
         <SimpleWordChain 
           startWord="CAT" 
           endWord="DOG" 
-          chainLength={4} 
+          chainLength={4}
+          darkMode={DARK_MODE}
           onComplete={(attempts, time) => {
             console.log(`Completed in ${attempts} attempts and ${time} seconds`);
           }}
         />
         
-        {/* Connection test hidden at bottom */}
-        <div className="mt-8 opacity-30 hover:opacity-100 transition-opacity text-xs">
+        {/* Connection test only shown on failure */}
+        <div className="mt-8">
           <SimpleConnectionTest />
         </div>
       </div>
@@ -37,9 +42,9 @@ function Home() {
 
 function App() {
   return (
-    <div className="App bg-gray-100 min-h-screen">
+    <div className={`App ${DARK_MODE ? 'bg-gray-900' : 'bg-gray-100'} min-h-screen`}>
       <Router>
-        <OverlayNavigation>
+        <OverlayNavigation darkMode={DARK_MODE}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/daily-challenge" element={<DailyChallengePage />} />
