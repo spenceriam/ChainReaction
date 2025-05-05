@@ -7,6 +7,7 @@ import { SimpleConnectionTest } from './components/common/SimpleConnectionTest';
 import { DailyChallengePage } from './pages/DailyChallengePage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { TimedModePage } from './pages/TimedModePage';
+import { EndlessModePage } from './pages/EndlessModePage';
 
 function Home() {
   return (
@@ -23,7 +24,7 @@ function Home() {
           </p>
         </div>
         
-        <div className="mt-6 flex flex-col sm:flex-row gap-4">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <Link 
             to="/daily-challenge" 
             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
@@ -37,8 +38,14 @@ function Home() {
             Try Timed Mode
           </Link>
           <Link 
+            to="/endless-mode" 
+            className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-center"
+          >
+            Play Endless Mode
+          </Link>
+          <Link 
             to="/leaderboard" 
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 text-center"
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 text-center sm:col-span-2 md:col-span-3"
           >
             View Leaderboards
           </Link>
@@ -65,6 +72,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/daily-challenge" element={<DailyChallengePage />} />
             <Route path="/timed-mode" element={<TimedModePage />} />
+            <Route path="/endless-mode" element={<EndlessModePage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
           </Routes>
         </Layout>

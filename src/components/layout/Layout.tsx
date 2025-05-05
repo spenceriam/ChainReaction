@@ -51,6 +51,16 @@ export function Layout({ children }: LayoutProps) {
                   Timed Mode
                 </Link>
                 <Link
+                  to="/endless-mode"
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    location.pathname === '/endless-mode'
+                      ? 'bg-blue-100 text-blue-800'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  Endless Mode
+                </Link>
+                <Link
                   to="/leaderboard"
                   className={`px-3 py-2 rounded-md text-sm font-medium ${
                     location.pathname === '/leaderboard'
@@ -83,7 +93,7 @@ export function Layout({ children }: LayoutProps) {
           
           {/* Mobile navigation */}
           <div className="md:hidden mt-3 pb-2">
-            <div className="flex space-x-2">
+            <div className="flex flex-wrap space-x-2">
               <Link
                 to="/"
                 className={`px-3 py-1 rounded-md text-sm ${
@@ -113,6 +123,16 @@ export function Layout({ children }: LayoutProps) {
                 }`}
               >
                 Timed
+              </Link>
+              <Link
+                to="/endless-mode"
+                className={`px-3 py-1 rounded-md text-sm ${
+                  location.pathname === '/endless-mode'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                Endless
               </Link>
               <Link
                 to="/leaderboard"

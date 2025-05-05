@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Leaderboard } from '../components/game/Leaderboard';
 
 export function LeaderboardPage() {
-  const [activeTab, setActiveTab] = useState<'daily' | 'weekly' | 'timed'>('daily');
+  const [activeTab, setActiveTab] = useState<'daily' | 'weekly' | 'timed' | 'endless'>('daily');
   
   return (
     <div className="container mx-auto px-4 py-8">
@@ -41,6 +41,16 @@ export function LeaderboardPage() {
             >
               Timed Mode
             </button>
+            <button
+              onClick={() => setActiveTab('endless')}
+              className={`py-2 px-4 text-center border-b-2 font-medium text-sm ${
+                activeTab === 'endless'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Endless Mode
+            </button>
           </nav>
         </div>
       </div>
@@ -68,6 +78,15 @@ export function LeaderboardPage() {
           <Leaderboard type="timed" limit={20} />
           <p className="mt-4 text-sm text-gray-500">
             Rankings based on highest scores in Timed Mode. Complete more chains before time runs out!
+          </p>
+        </div>
+      )}
+      
+      {activeTab === 'endless' && (
+        <div>
+          <Leaderboard type="endless" limit={20} />
+          <p className="mt-4 text-sm text-gray-500">
+            Rankings based on highest scores in Endless Mode. How many chains can you complete?
           </p>
         </div>
       )}

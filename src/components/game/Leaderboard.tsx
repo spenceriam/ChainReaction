@@ -24,10 +24,18 @@ interface WeeklyLeaderboardEntry {
   challenges_completed: number;
 }
 
-type LeaderboardEntry = DailyLeaderboardEntry | TimedLeaderboardEntry | WeeklyLeaderboardEntry;
+interface EndlessLeaderboardEntry {
+  username: string;
+  user_id: string;
+  high_score: number;
+  chains_completed: number;
+  max_difficulty: string;
+}
+
+type LeaderboardEntry = DailyLeaderboardEntry | TimedLeaderboardEntry | WeeklyLeaderboardEntry | EndlessLeaderboardEntry;
 
 interface LeaderboardProps {
-  type?: 'daily' | 'weekly' | 'timed';
+  type?: 'daily' | 'weekly' | 'timed' | 'endless';
   limit?: number;
 }
 
@@ -63,6 +71,13 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
           // Get timed mode leaderboard
           const { data, error } = await supabase
             .rpc('get_timed_leaderboard', { entries_limit: limit });
+            
+          if (error) throw error;
+          query = data;
+        } else if (type === 'endless') {
+          // Get endless mode leaderboard
+          const { data, error } = await supabase
+            .rpc('get_endless_leaderboard', { entries_limit: limit });
             
           if (error) throw error;
           query = data;
@@ -109,7 +124,10 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <h2 className="text-xl font-bold p-4 bg-blue-50">
-        {type === 'daily' ? 'Daily' : type === 'weekly' ? 'Weekly' : 'Timed Mode'} Leaderboard
+        {type === 'daily' ? 'Daily' : 
+         type === 'weekly' ? 'Weekly' : 
+         type === 'timed' ? 'Timed Mode' : 
+         'Endless Mode'} Leaderboard
       </h2>
       
       <table className="min-w-full divide-y divide-gray-200">
@@ -154,6 +172,19 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
                 </th>
               </>
             )}
+            {type === 'endless' && (
+              <>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Score
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Chains
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Max Difficulty
+                </th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -194,16 +225,30 @@ export function Leaderboard({ type = 'daily', limit = 10 }: LeaderboardProps) {
                 </>
               )}
               
-              {type === 'timed' && 'high_score' in entry && (
+              {type === 'timed' && 'high_score' in entry && 'best_level' in entry && (
                 <>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {entry.high_score}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {entry.best_level}
+                    {(entry as TimedLeaderboardEntry).best_level}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {entry.games_played}
+                    {(entry as TimedLeaderboardEntry).games_played}
+                  </td>
+                </>
+              )}
+              
+              {type === 'endless' && 'max_difficulty' in entry && (
+                <>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.high_score}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.chains_completed}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {entry.max_difficulty.charAt(0).toUpperCase() + entry.max_difficulty.slice(1)}
                   </td>
                 </>
               )}

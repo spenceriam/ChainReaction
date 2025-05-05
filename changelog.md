@@ -12,6 +12,33 @@
 
 ### Fixed
 
+## [0.5.0] - 2025-05-05
+
+### Added
+- Implemented Endless Mode feature with continuously generated chains
+- Created EndlessMode component with progressive difficulty
+- Added continuous chain generation with difficulty adjustment
+- Implemented score tracking and statistics for Endless Mode
+- Created SQL functions for saving and retrieving endless mode results
+- Added Endless Mode leaderboard to track high scores
+- Enhanced Leaderboard component to support Endless Mode
+
+### Changed
+- Updated Leaderboard component with endless mode statistics
+- Enhanced LeaderboardPage with additional tab for Endless Mode
+- Updated navigation to include Endless Mode
+- Improved home page with grid layout for game modes
+- Enhanced mobile navigation with better responsive design
+
+### Deprecated
+- None
+
+### Removed
+- None
+
+### Fixed
+- Fixed type checking in Leaderboard component to properly handle different entry types
+
 ## [0.4.0] - 2025-05-05
 
 ### Added
