@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { createClient } from '../utils/supabase-server'
 import { redirect } from 'next/navigation'
 import DemoSection from '../components/landing/DemoSection'
+import TestComponent from '../components/landing/TestComponent'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -21,6 +22,9 @@ export default async function HomePage() {
           A competitive word puzzle game where players complete chains by finding connecting words
           that differ by exactly one letter.
         </p>
+        
+        {/* Test Component */}
+        <TestComponent />
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Link 
