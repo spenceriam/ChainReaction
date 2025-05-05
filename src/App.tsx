@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { Layout } from './components/layout/Layout';
-import { WordChain } from './components/game/WordChain';
+import { OverlayNavigation } from './components/layout/OverlayNavigation';
+import { SimpleWordChain } from './components/game/SimpleWordChain';
 import { SimpleConnectionTest } from './components/common/SimpleConnectionTest';
 import { DailyChallengePage } from './pages/DailyChallengePage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
@@ -12,58 +12,24 @@ import { AutoDemo } from './components/demo/AutoDemo';
 
 function Home() {
   return (
-    <div>
-      <div className="p-4 bg-white shadow rounded-lg mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Welcome to ChainReaction</h1>
-        <p className="mt-2 text-gray-600">
-          The word puzzle game where you must complete chains by finding connecting words.
-        </p>
-        <div className="mt-4">
-          <p className="text-gray-700">
-            Start from one word and reach the target word by changing just one letter at a time.
-            Each intermediate word must be a valid dictionary word.
-          </p>
-        </div>
+    <div className="flex flex-col items-center p-4 pt-6">
+      <div className="w-full max-w-md bg-white shadow rounded-lg p-6 mb-20">
+        <h1 className="text-2xl font-bold text-center text-gray-900 mb-6">ChainReaction</h1>
         
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <Link 
-            to="/daily-challenge" 
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
-          >
-            Play Daily Challenge
-          </Link>
-          <Link 
-            to="/timed-mode" 
-            className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 text-center"
-          >
-            Try Timed Mode
-          </Link>
-          <Link 
-            to="/endless-mode" 
-            className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-center"
-          >
-            Play Endless Mode
-          </Link>
-          <Link 
-            to="/leaderboard" 
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 text-center sm:col-span-2 md:col-span-3"
-          >
-            View Leaderboards
-          </Link>
+        {/* Main game area using SimpleWordChain */}
+        <SimpleWordChain 
+          startWord="CAT" 
+          endWord="DOG" 
+          chainLength={4} 
+          onComplete={(attempts, time) => {
+            console.log(`Completed in ${attempts} attempts and ${time} seconds`);
+          }}
+        />
+        
+        {/* Connection test hidden at bottom */}
+        <div className="mt-8 opacity-30 hover:opacity-100 transition-opacity text-xs">
+          <SimpleConnectionTest />
         </div>
-      </div>
-      
-      {/* Supabase Connection Test - Check console for results */}
-      <SimpleConnectionTest />
-      
-      <div className="mt-6">
-        <h2 className="text-xl font-bold mb-4">See How It Works:</h2>
-        <AutoDemo demoSpeed={2500} />
-      </div>
-      
-      <div className="mt-8">
-        <h2 className="text-xl font-bold mb-4">Ready to Try? Give it a go:</h2>
-        <WordChain startWord="CAT" endWord="DOG" chainLength={4} />
       </div>
     </div>
   );
@@ -71,9 +37,9 @@ function Home() {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-gray-100 min-h-screen">
       <Router>
-        <Layout>
+        <OverlayNavigation>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/daily-challenge" element={<DailyChallengePage />} />
@@ -81,7 +47,7 @@ function App() {
             <Route path="/endless-mode" element={<EndlessModePage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
           </Routes>
-        </Layout>
+        </OverlayNavigation>
       </Router>
     </div>
   );
