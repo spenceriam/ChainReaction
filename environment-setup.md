@@ -1,40 +1,51 @@
-# Environment Setup for ChainReaction
-
-This document explains how to set up environment variables for the ChainReaction project.
+# ChainReaction Environment Setup
 
 ## Environment Variables
 
-Create a `.env` file in the root directory of the project with the following variables:
+ChainReaction requires the following environment variables to be set:
+
+### For Next.js App with Supabase Auth
+
+Create a `.env.local` file in the root of your project with the following:
 
 ```
-# Supabase Configuration
-REACT_APP_SUPABASE_URL=your-supabase-project-url
-REACT_APP_SUPABASE_ANON_KEY=your-supabase-anon-key
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 
-# Environment (development, production, test)
-NODE_ENV=development
+# Application
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-## Security Considerations
+## Getting Your Supabase Credentials
 
-1. **NEVER commit the `.env` file to the repository**
-2. The `.env` file is listed in `.gitignore` to prevent accidental commits
-3. Ensure you keep your API keys secure and do not share them
-4. Different environments (development, production, test) should use different API keys
+1. Go to [Supabase](https://app.supabase.com) and log in to your account
+2. Select your project (or create a new one)
+3. Go to Project Settings
+4. Click on "API" in the sidebar
+5. Under "Project API keys", you'll find:
+   - Project URL: Use this for `NEXT_PUBLIC_SUPABASE_URL`
+   - `anon` `public` key: Use this for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
-## Obtaining Supabase Credentials
+## Application URL
 
-1. Go to your Supabase project dashboard
-2. Navigate to Project Settings > API
-3. Copy the URL and anon/public key
+The `NEXT_PUBLIC_APP_URL` should point to the URL where your application is running:
 
-![Supabase API Keys](https://supabase.com/docs/img/project-api-keys.png)
+- Local development: `http://localhost:3000`
+- Production: Your deployed application URL (e.g., `https://chainreaction.vercel.app`)
 
-## Environment Files for Different Environments
+This is used for auth redirects and other functionality that needs to know the base URL of your application.
 
-For different environments, you can create:
-- `.env.development` for development 
-- `.env.test` for testing
-- `.env.production` for production
+## Security Notes
 
-These files are also included in the `.gitignore` file. 
+- Never commit your `.env.local` file to version control
+- Make sure `.env.local` is included in your `.gitignore` file
+- For production deployments, set these environment variables in your hosting provider's dashboard
+
+## Next Steps
+
+After setting up your environment variables:
+
+1. Run `npm install` to install dependencies
+2. Run `npm run dev` to start the development server
+3. Visit `http://localhost:3000` to view the application 
