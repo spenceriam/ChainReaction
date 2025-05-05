@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import { AuthProvider } from './hooks/useAuth';
 import { Layout } from './components/layout/Layout';
 import { WordChain } from './components/game/WordChain';
+import { SimpleConnectionTest } from './components/common/SimpleConnectionTest';
 
 function App() {
   return (
-    <AuthProvider>
+    <div className="App">
       <Layout>
         <div className="p-4 bg-white shadow rounded-lg mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Welcome to ChainReaction</h1>
@@ -21,12 +21,15 @@ function App() {
           </div>
         </div>
         
+        {/* Supabase Connection Test - Check console for results */}
+        <SimpleConnectionTest />
+        
         <div className="mt-6">
           <h2 className="text-xl font-bold mb-4">Try the Demo:</h2>
-          <WordChain startWord="CAT" endWord="DOG" chainLength={4} />
+          <WordChain startWord="CHAIN" endWord="REACT" chainLength={5} />
         </div>
       </Layout>
-    </AuthProvider>
+    </div>
   );
 }
 

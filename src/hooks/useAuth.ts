@@ -1,35 +1,46 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '../utils/supabase-browser'
-import type { User } from '@supabase/supabase-js'
+import { supabase } from '../utils/supabase'
+import type { User, AuthError } from '@supabase/supabase-js'
 
+// Auth hook for React components to access authentication state
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const supabase = createClient()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Get current user on mount
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       setUser(user)
-      setIsLoading(false)
+      setLoading(false)
     }
 
     getUser()
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null)
-      setIsLoading(false)
-    })
+    // Subscribe to auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null)
+        setLoading(false)
+      }
+    )
 
+    // Cleanup subscription on unmount
     return () => {
       subscription.unsubscribe()
     }
-  }, [supabase])
+  }, [])
+
+  // Sign out function
+  const signOut = async () => {
+    return supabase.auth.signOut()
+  }
 
   return {
     user,
-    isLoading,
+    loading,
+    signOut
   }
-} 
+}
