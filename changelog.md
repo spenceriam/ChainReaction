@@ -14,6 +14,7 @@
 - Created supabase-server.ts utility for server-side Supabase client
 - Added supabase-browser.ts for browser-side Supabase client
 - Implemented middleware.ts with proper authentication flow
+- Added interactive demo section to the landing page showing how the word chain game works
 
 ### Changed
 - Optimized game mode components for better performance

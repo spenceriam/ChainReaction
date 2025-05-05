@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '../utils/supabase-server'
 import { redirect } from 'next/navigation'
+import DemoSection from '../components/landing/DemoSection'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -36,7 +37,10 @@ export default async function HomePage() {
           </Link>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+        {/* Demo Section */}
+        <DemoSection />
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-12">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-3">Daily Challenges</h2>
             <p>
